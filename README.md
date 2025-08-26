@@ -60,3 +60,10 @@ This is necessary because many factor store does not securely derive key from a 
 as it expects the password to be random and have sufficient entropy.
 
 This is enforced by having no confirmation for the password input, as it is not designed to handle a typed in password.
+
+## Non interactive usage
+
+The following environment variables can be used to provide input non interactively:
+
+- `AGE_PLUGIN_MANYFACTOR_PIN`: the pin for the security key
+- `AGE_PLUGIN_MANYFACTORSTORE_PASSWORD`: the password for the file
