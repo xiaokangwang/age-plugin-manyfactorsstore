@@ -44,4 +44,19 @@ Not all options are supported, or omittable on all keys.
 
 - `touch`: require a touch on the security key
 - `pin`: require a pin on the security key
-- `password`: require a password to encrypt/decrypt
+- `password`: require a password to encrypt/decrypt. This password must be randomly generated with sufficient entropy.
+
+# Password generation
+
+You must generate a password with sufficient entropy. You can use the following command to generate a random password:
+
+```bash
+head -c 32 /dev/urandom | base64
+```
+
+You can then encrypt this password with a symmetric encryption from age or gpg to store it safely.
+
+This is necessary because many factor store does not securely derive key from a password, 
+as it expects the password to be random and have sufficient entropy.
+
+This is enforced by having no confirmation for the password input, as it is not designed to handle a typed in password.
