@@ -10,8 +10,8 @@ import (
 var getPin = getPinTerm
 
 func getPinTerm() (string, error) {
-	if os.Getenv("AGE_PLUGIN_MANYFACTOR_PIN") != "" {
-		return os.Getenv("AGE_PLUGIN_MANYFACTOR_PIN"), nil
+	if os.Getenv("AGE_PLUGIN_MANYFACTORSTORE_PIN") != "" {
+		return os.Getenv("AGE_PLUGIN_MANYFACTORSTORE_PIN"), nil
 	}
 
 	fmt.Fprintf(os.Stderr, "Enter the security key PIN: ")
@@ -25,8 +25,8 @@ func getPinTerm() (string, error) {
 }
 
 func getPinAgePlugin() (string, error) {
-	if os.Getenv("AGE_PLUGIN_MANYFACTOR_PIN") != "" {
-		return os.Getenv("AGE_PLUGIN_MANYFACTOR_PIN"), nil
+	if os.Getenv("AGE_PLUGIN_MANYFACTORSTORE_PIN") != "" {
+		return os.Getenv("AGE_PLUGIN_MANYFACTORSTORE_PIN"), nil
 	}
 	return plugin_state.RequestValue("Enter the security key PIN:", true)
 }
