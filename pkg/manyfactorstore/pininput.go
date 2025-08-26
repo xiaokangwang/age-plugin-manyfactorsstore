@@ -21,5 +21,8 @@ func getPinTerm() (string, error) {
 }
 
 func getPinAgePlugin() (string, error) {
+	if os.Getenv("AGE_PLUGIN_MANYFACTOR_PIN") != "" {
+		return os.Getenv("AGE_PLUGIN_MANYFACTOR_PIN"), nil
+	}
 	return plugin_state.RequestValue("Enter the security key PIN:", true)
 }

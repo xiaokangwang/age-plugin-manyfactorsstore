@@ -6,6 +6,7 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"errors"
+	"os"
 
 	"filippo.io/age"
 	"filippo.io/age/plugin"
@@ -215,14 +216,18 @@ func (i *IdentityStructure) Unwrap(s []*age.Stanza) ([]byte, error) {
 	// Get password if it is required.
 	password := defaultPassword
 	if options.VerifyPassword {
-		passwordRecv, err := plugin_state.RequestValue("Password:", true)
-		if err != nil {
-			return nil, err
+		if os.Getenv("AGE_PLUGIN_MANYFACTORSTORE_PASSWORD") != "" {
+			password = os.Getenv("AGE_PLUGIN_MANYFACTORSTORE_PASSWORD")
+		} else {
+			passwordRecv, err := plugin_state.RequestValue("Password:", true)
+			if err != nil {
+				return nil, err
+			}
+			if passwordRecv == "" {
+				return nil, errors.New("password required")
+			}
+			password = passwordRecv
 		}
-		if passwordRecv == "" {
-			return nil, errors.New("password required")
-		}
-		password = passwordRecv
 	}
 
 	for _, stanza := range s {
