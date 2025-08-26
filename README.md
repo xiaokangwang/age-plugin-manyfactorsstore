@@ -5,7 +5,7 @@ with modifications to support additional use cases. Its file format is different
 
 This plugin allows you to use multiple factors for encryption and decryption with age.
 It supports the following factors:
-- FIDO2 security keys (e.g., Yubikey, SoloKey)
+- FIDO2 security keys
 - Password (per file)
 - PIN (on the security key)
 
