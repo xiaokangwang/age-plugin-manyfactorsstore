@@ -1,0 +1,25 @@
+package manyfactorstore
+
+import (
+	"fmt"
+	"os"
+
+	"golang.org/x/term"
+)
+
+var getPin = getPinTerm
+
+func getPinTerm() (string, error) {
+	fmt.Fprintf(os.Stderr, "Enter the security key PIN: ")
+	pin, err := term.ReadPassword(int(os.Stdin.Fd()))
+	if err != nil {
+		fmt.Printf("Error reading the PIN: %s\n", err)
+		return "", err
+	}
+	fmt.Fprintf(os.Stderr, "\r\033[K") // Clear the line.
+	return string(pin), nil
+}
+
+func getPinAgePlugin() (string, error) {
+	return plugin_state.RequestValue("Enter the security key PIN:", true)
+}
