@@ -10,6 +10,10 @@ import (
 var getPin = getPinTerm
 
 func getPinTerm() (string, error) {
+	if os.Getenv("AGE_PLUGIN_MANYFACTOR_PIN") != "" {
+		return os.Getenv("AGE_PLUGIN_MANYFACTOR_PIN"), nil
+	}
+
 	fmt.Fprintf(os.Stderr, "Enter the security key PIN: ")
 	pin, err := term.ReadPassword(int(os.Stdin.Fd()))
 	if err != nil {
